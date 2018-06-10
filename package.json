@@ -1,0 +1,11 @@
+{
+  "name": "OJOJS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "repository": "git@github.com:onejustone/OJOJS.git",
+  "author": "chenrong <onejustone404@gmail.com>",
+  "license": "MIT"
+}
