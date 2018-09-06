@@ -3,9 +3,34 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --config build/webpack.dev.config.js",
+    "prod": "cross-env NODE_ENV=development webpack --progress -config build/webpack.prod.config.js"
   },
   "repository": "git@github.com:onejustone/OJOJS.git",
   "author": "chenrong <onejustone404@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "postcss-loader": "^3.0.0",
+    "scss": "^0.2.4",
+    "scss-loader": "^0.0.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.7",
+    "webpack-merge": "^4.1.4"
+  }
 }

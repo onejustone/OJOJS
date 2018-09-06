@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+  <div id="box">
+    <div id="parent">
+      <div id="children"></div>
+    </div>
+  </div>
+</body>
+<script src="../utils/dom-events.js"></script>
+<script>
+( function (params) {
+  const childrn = document.querySelector('#children')
+  console.log(childrn)
+  EventUtil.addHandler(childrn, 'click', function (event) {
+    console.log(event)
+  })
+  EventUtil.addHandler(childrn, 'mousewheel', function (event) {
+     // FireFox浏览器，要使用DOMMouseScroll
+    // EventUtil.preventDefault(event)
+    console.log(event)
+    EventUtil.stopPropagation(event)
+    const wheelDelta = EventUtil.getWheelDelta(event)
+    const direction = wheelDelta > 0 ? 'up' : 'down'
+    const scrollTop = event.scrollTop
+    console.log(childrn.scrollTop, 'scollTop')
+
+    if (direction === 'up')
+    console.log(wheelDelta, 'wheelDelta')
+  })
+})()
+</script>
+</html>
