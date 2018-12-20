@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "amd": true,
+    "node": true,
+    "jquery": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "console": "allow",
+    "semi": [2],
+    "no-irregular-whitespace": 2,
+    "no-multi-spaces": 2,
+    "no-trailing-spaces": 2
+  }
+}

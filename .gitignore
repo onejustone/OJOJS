@@ -1,16 +1,16 @@
-.DS_Store
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-test/unit/coverage
-test/e2e/reports
-selenium-debug.log
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
 
-# Editor directories and files
+# IntelliJ project files
 .idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
+*.iml
+out
+gen
+node_modules/
+yarn-error.log
+dist/
+config/*
+!config/prod.js
+!config/dev.js
+!config/local.example.js

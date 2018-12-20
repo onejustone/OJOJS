@@ -1,6 +1,9 @@
 {
   "presets": [
-    "stage-2"
+    "@babel/preset-env"
   ],
-  "plugins": []
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-dynamic-import"
+  ]
 }

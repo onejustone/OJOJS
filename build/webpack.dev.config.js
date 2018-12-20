@@ -1,53 +1,43 @@
-// 开发配置
-const webpack = require('webpack')
-const merge = require('webpack-merge')
+const { resolve } = require('path');
+const merge = require('webpack-merge');
+const devConfig = require('./config/development');
+const baseWebpackConfig = require('./webpack.base.config');
+console.log(baseWebpackConfig);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const internalIp = require('internal-ip');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const baseWebpackConfig = require('./webpack.base.config')
-const utils = require('./utils')
-const config = require('./config')
+const devWebpackConfig = merge(baseWebpackConfig, {
+  entry: devConfig.entry,
 
-// 多入口热更新
-// Object.keys(baseWebpackConfig.entry).forEach((name) => {
-//     baseWebpackConfig.entry[name] = [
-//       `webpack-dev-server/client?http://localhost:${config.dev.port}/`,
-//       'webpack/hot/dev-server'
-//     ].concat(baseWebpackConfig.entry[name])
-// })
-
-module.exports = merge(baseWebpackConfig, {
-  devServer: {
-    // 热更新配置
-    hot: true,
-    quiet: true, // 保证 friendly-errors-webpack-plugin 生效
-    host: '0.0.0.0',
-    port: config.dev.port,
-    open: true,
-    noInfo: true,
-    publicPath: config.dev.publicPath
-  },
   output: {
-    path: config.dev.path,
-    publicPath: config.dev.publicPath
+    path: devConfig.outputPath
   },
-  module: {
-    rules: utils.styleLoaders()
-  },
+
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"',
-      '__ENV__': true,
-      'development': true,
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    // HtmlWebpackPlugin 会自动将生成的js代码插入到 index.html
     new HtmlWebpackPlugin({
-      title: 'ojo.js',
-      // filename 是相对于 webpack 配置项 output.path（打包资源存储路径）
-      filename: './index.html',
-      // template 的路径是相对于webpack编译时的上下文目录，就是项目根目录
-      template: './index.html',
-      inject: true
+      template: resolve(__dirname, '../src/example/index.html'),
+      /*
+      因为和 webpack 4 的兼容性问题，chunksSortMode 参数需要设置为 none
+      https://github.com/jantimon/html-webpack-plugin/issues/870
+      */
+      chunksSortMode: 'none'
     })
   ]
-})
+});
+
+module.exports = devWebpackConfig;
+
+module.exports.serve = {
+  host: '0.0.0.0',
+  port: devConfig.serve.port,
+  // 开发环境允许其他电脑访问
+  hot: {
+    host: {
+      client: internalIp.v4.sync(),
+      server: '0.0.0.0'
+    }
+  }
+  // dev: {
+  //   publicPath: config.publicPath
+  // }
+};
