@@ -8,5 +8,5 @@ babel-loader babel-eslint \
 html-webpack-plugin html-loader \
 css-loader style-loader  postcss-loader autoprefixer \
 url-loader file-loader cross-env \
-internal-ip --save-dev && \
+internal-ip clean-webpack-plugin --save-dev && \
 cnpm install lodash --save

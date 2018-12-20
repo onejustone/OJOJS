@@ -86,6 +86,47 @@ function removeHandler (element, eventType, handler) {
   }
 }
 
+function catIn (target, parent) {
+  const path = [];
+  let parentNode = target;
+
+  while (parentNode && parentNode !== document.body) {
+    path.push(parentNode);
+    parentNode = parentNode.parentNode;
+  }
+
+  return path.indexOf(parent) !== -1;
+}
+
+function popupCenterWindow(href, title, percent = 0.8, closeCb) {
+  const w = window.screen.width * percent;
+  const h = window.screen.height * percent;
+  const left = window.screen.width * (1 - percent) / 2;
+  const top = window.screen.height * (1 - percent) / 2;
+  const windowHandler = window.open(href, title, `
+    toolbar=no,
+    location=no,
+    directories=no,
+    status=no,
+    menubar=no,
+    scrollbars=no,
+    resizable=no,
+    copyhistory=no,
+    width=${w},
+    height=${h}, top=${top}, left=${left}`);
+
+  if (closeCb) {
+    const timer = setInterval(() => {
+      if (windowHandler.closed) {
+        clearInterval(timer);
+        closeCb();
+      }
+    }, 100);
+  }
+
+  return windowHandler;
+}
+
 export {
   addHandler,
   getEvent,
@@ -94,7 +135,8 @@ export {
   stopPropagation,
   getWheelDelta,
   getPageCoordinates,
-  removeHandler
+  removeHandler,
+  catIn
 };
 
 export default {
@@ -105,5 +147,7 @@ export default {
   stopPropagation,
   getWheelDelta,
   getPageCoordinates,
-  removeHandler
+  removeHandler,
+  catIn,
+  popupCenterWindow
 };

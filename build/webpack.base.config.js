@@ -1,21 +1,14 @@
 const { resolve } = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Webpack = require('webpack');
 const config = require(`./config/${process.env.NODE_ENV}` || 'prod');
-console.log(config);
 const pkgInfo = require('../package.json');
-
-// const history = require('connect-history-api-fallback')
-// const convert = require('koa-connect')
 
 const dev = Boolean(process.env.NODE_ENV === 'development');
 
 module.exports = {
   mode: dev ? 'development' : 'production',
 
-  devtool: dev ? 'cheap-module-eval-source-map' : 'hidden-source-map',
-
-  // entry: './src/example/main.js',
+  devtool: dev ? 'cheap-module-eval-source-map' : false,
 
   resolve: {
     // 简化 import 路径
@@ -26,11 +19,11 @@ module.exports = {
   },
 
   output: {
-    path: resolve(__dirname, '../dist'),
+    // path: resolve(__dirname, '../dist'),
     // publicPath: config.publicPath,
     // chunkFilename 使用 [chunkhash] 防止浏览器读取错误缓存，那么 entry 同样需要加上 hash。
     // 但使用 webpack-serve 启动开发环境时，entry 文件是没有 [chunkhash] 的，用了会报错。
-    filename: dev ? '[name].js' : '[name].[chunkhash].js',
+    filename: dev ? '[name].js' : '[name].js',
     /*
     代码中引用的文件（js、css、图片等）会根据配置合并为一个或多个包，我们称一个包为 chunk。
     每个 chunk 包含多个 modules。无论是否是 js，webpack 都将引入的文件视为一个 module。
@@ -41,7 +34,7 @@ module.exports = {
     还有一个占位符 [id]，编译时每个 chunk 会有一个id。
     我们在这里不使用它，因为这个 id 是个递增的数字，增加或减少一个chunk，都可能导致其他 chunk 的 id 发生改变，导致缓存失效。
     */
-    chunkFilename: '[chunkhash].js'
+    // chunkFilename: '[chunkhash].js'
   },
 
   externals: {
@@ -140,20 +133,3 @@ module.exports = {
     hints: dev ? false : 'warning'
   }
 };
-
-// if (dev) {
-//   module.exports.serve = {
-//     host: '0.0.0.0',
-//     port: config.serve.port,
-//     // 开发环境允许其他电脑访问
-//     hot: {
-//       host: {
-//         client: internalIp.v4.sync(),
-//         server: '0.0.0.0'
-//       }
-//     }
-//     // dev: {
-//     //   publicPath: config.publicPath
-//     // }
-//   };
-// }

@@ -2,7 +2,6 @@ const { resolve } = require('path');
 const merge = require('webpack-merge');
 const devConfig = require('./config/development');
 const baseWebpackConfig = require('./webpack.base.config');
-console.log(baseWebpackConfig);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const internalIp = require('internal-ip');
 

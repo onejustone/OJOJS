@@ -3,7 +3,7 @@ const hasOwn = function _hasOwn (obj, key) {
 };
 
 const isEmptyItem = function _isEmptyItem (values) {
-  return values.every(child => isEmptyArray(child.value) || isEmptyValue(child.value));
+  return values.every(child => isEmptyArray(child.value) || isEmpty(child.value));
 };
 
 const isString = function _isString (value) {
@@ -18,7 +18,7 @@ const isEmptyArray = function _isEmptyArray (value) {
   return Array.isArray(value) && !value.length;
 };
 
-const isEmptyValue = function _isEmptyValue (value, type) {
+const isEmpty = function _isEmpty (value, type) {
   if (value === undefined || value === null) {
     return true;
   }
@@ -57,29 +57,6 @@ const _typeof = function (obj) {
     : typeof obj;
 };
 
-const deepCloneObj = function _deepCloneObj (source) {
-  if (!source) {
-    return [];
-  }
-
-  if (!source && typeof source !== 'object') {
-    throw new Error('error arguments', 'shallowClone');
-  }
-
-  const targetObj = source.constructor === Array ? [] : {};
-  for (const keys in source) {
-    if (source.hasOwnProperty(keys)) {
-      if (source[keys] && typeof source[keys] === 'object') {
-        targetObj[keys] = source[keys].constructor === Array ? [] : {};l
-        targetObj[keys] = _deepCloneObj(source[keys]);
-      } else {
-        targetObj[keys] = source[keys];
-      }
-    }
-  }
-  return targetObj;
-};
-
 const each = function _each (obj, callback) {
   let i, len;
   if (Array.isArray(obj)) {
@@ -99,31 +76,28 @@ const each = function _each (obj, callback) {
   return obj;
 };
 
-const unique = function (items, key) {
-  const tmpArr = [];
-  const tmpSet = new Set();
-
-  items.forEach(item => {
-    if (!tmpSet.has(item[key])) {
-      tmpSet.add(item[key]);
-      tmpArr.push(item);
-    }
-  });
-
-  return tmpArr;
-};
-
 export {
-  getCamelizeKey,
+  // getCamelizeKey,
   hasOwn,
   isEmptyItem,
   isString,
   isNativeStringType,
   _typeof,
   isEmptyArray,
-  isEmptyValue,
   isEmptyObject,
-  deepCloneObj,
-  each,
-  unique
+  isEmpty,
+  each
+};
+
+export default {
+  // getCamelizeKey,
+  hasOwn,
+  isEmptyItem,
+  isString,
+  isNativeStringType,
+  _typeof,
+  isEmptyArray,
+  isEmptyObject,
+  isEmpty,
+  each
 };
