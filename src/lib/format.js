@@ -39,3 +39,8 @@ export {
   formatNumebr,
   formartFileSize,
 };
+
+export default {
+  formatNumebr,
+  formartFileSize,
+};

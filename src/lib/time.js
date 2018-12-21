@@ -1,19 +1,10 @@
-const moment = require('moment');
+import moment from 'moment';
 moment.locale('zh-cn');
 
 const secondsOf1D = 60 * 60 * 24;
 
 function isSameOf (a, b, unit) {
   return (a.clone().startOf(unit).unix() === b.clone().startOf(unit).unix());
-}
-
-export function standard (timestamp) {
-  const target = moment.unix(timestamp);
-  if (!target.isValid() || timestamp < 0) {
-    return '';
-  } else {
-    return target.format('YYYY-MM-DD HH:mm:ss');
-  }
 }
 
 function addSuffix (date, time, mode) {
@@ -25,7 +16,7 @@ function addSuffix (date, time, mode) {
   }
 }
 
-export function humanize (timestamp, mode = 'long') {
+function humanize (timestamp, mode = 'long') {
   const now = moment();
   const target = moment.unix(timestamp);
   const deltaDay = Math.floor((timestamp - now.clone().startOf('day').unix()) / secondsOf1D);
@@ -60,3 +51,23 @@ export function humanize (timestamp, mode = 'long') {
     return target.format('YYYY-MM-DD');
   }
 }
+
+function standard(timestamp) {
+  const target = moment.unix(timestamp);
+  if (!target.isValid() || timestamp < 0) {
+    return '';
+  } else {
+    return target.format('YYYY-MM-DD HH:mm:ss');
+  }
+}
+
+
+export {
+  standard,
+  humanize
+};
+
+export default {
+  standard,
+  humanize
+};

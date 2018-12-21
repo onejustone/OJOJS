@@ -30,10 +30,8 @@ function copyTextToClipboard(text) {
 
 export {
   copyTextToClipboard,
-  resetObjectToEmpty
 };
 
 export default {
   copyTextToClipboard,
-  resetObjectToEmpty
 };
