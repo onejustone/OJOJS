@@ -14,7 +14,7 @@ export default {
   input: 'src/lib/index.js',
   output: {
     file: 'bin/main.js',
-    format: 'umd',
+    format: 'cjs',
     name: 'ojo'
   },
   plugins: [
