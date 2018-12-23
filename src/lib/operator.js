@@ -13,6 +13,11 @@ function multiply() {
   return flatArgumentsArr.reduce((x, y) => +(+x * +y).toFixed(2));
 }
 
+export {
+  sum,
+  multiply
+};
+
 export default {
   sum,
   multiply

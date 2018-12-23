@@ -1,4 +1,8 @@
-function formatNumebr (x) {
+import {
+  isNumber
+} from './type';
+
+function formatToNumebr (x) {
   if (!x) return null;
 
   if (typeof x === 'number') return x;
@@ -10,14 +14,41 @@ function formatNumebr (x) {
   return number;
 };
 
-function formartFileSize (size) {
+function prettyNumberToMoney ({
+  prefix = '¥',
+  number = null,
+  decimals = 2,
+  decimal = '.',
+  separator = ',',
+  suffix = '',
+} = {}) {
+  let num = formatToNumebr(number);
+  num = num.toFixed(decimals);
+  num += '';
+
+  const x = num.split('.');
+  let x1 = x[0];
+  const x2 = x.length > 1 ? decimal + x[1] : '';
+
+  const rgx = /(\d+)(\d{3})/;
+
+  if (separator && !isNumber(separator)) {
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + separator + '$2');
+    }
+  }
+
+  return prefix + x1 + x2 + suffix;
+}
+
+function formartFileSize (byteSize) {
   const fileSizeUnit = ['B', 'K', 'M', 'G'];
 
-  if (isNaN(size)) {
+  if (isNaN(byteSize)) {
     throw new Error('size must be a number', 'formartFileSize');
   }
 
-  let estimateSize = Number(size);
+  let estimateSize = Number(byteSize);
   let i = 0;
   let unit = '';
 
@@ -36,11 +67,13 @@ function formartFileSize (size) {
 };
 
 export {
-  formatNumebr,
+  prettyNumberToMoney,
+  formatToNumebr,
   formartFileSize,
 };
 
 export default {
-  formatNumebr,
+  prettyNumberToMoney,
+  formatToNumebr,
   formartFileSize,
 };

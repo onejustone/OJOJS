@@ -2,8 +2,8 @@ const hasOwn = function _hasOwn (obj, key) {
   return isObject(obj) && Object.prototype.hasOwnProperty.call(obj, key);
 };
 
-const isEmptyItem = function _isEmptyItem (values) {
-  return values.every(child => isEmptyArray(child.value) || isEmpty(child.value));
+const isNumber = function _isNumber(value) {
+  return !isNaN(parseFloat(value));
 };
 
 const isString = function _isString (value) {
@@ -77,9 +77,8 @@ const each = function _each (obj, callback) {
 };
 
 export {
-  // getCamelizeKey,
   hasOwn,
-  isEmptyItem,
+  isNumber,
   isString,
   isNativeStringType,
   _typeof,
@@ -90,9 +89,8 @@ export {
 };
 
 export default {
-  // getCamelizeKey,
   hasOwn,
-  isEmptyItem,
+  isNumber,
   isString,
   isNativeStringType,
   _typeof,

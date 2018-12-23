@@ -19,8 +19,8 @@ import other from "./other";
 export * from "./shortcut";
 import shortcut from "./shortcut";
 
-export * from "./time";
-import time from "./time";
+// export * from "./time";
+// import time from "./time";
 
 export * from "./type";
 import type from "./type";
@@ -33,6 +33,5 @@ export default {
   ...operator,
   ...other,
   ...shortcut,
-  ...time,
   ...type,
 };

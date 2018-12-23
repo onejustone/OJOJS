@@ -46,23 +46,9 @@ const getPropByPath = function _getPropByPath(obj, path, strict) {
   };
 };
 
-const getValuePropByPath = function _getValuePropByPath(obj, path, strict) {
+const extractValue = function _extractValue(obj, path, strict) {
   return getPropByPath(obj, path, strict).v;
 };
-
-function extractValue(obj, path, defaultValue = null) {
-  if (!obj) return defaultValue;
-  if (typeof obj === 'undefined') {
-    return defaultValue;
-  }
-  const p = path.split('.');
-  let r = obj;
-  for (let i = 0; i < p.length; i += 1) {
-    if (!r[p[i]]) return defaultValue;
-    r = r[p[i]];
-  }
-  return r;
-}
 
 const deepCloneObj = function _deepCloneObj(source) {
   if (!source) {
@@ -103,16 +89,14 @@ const unique = function (items, key) {
 
 export {
   resetObjectToEmpty,
-  getValuePropByPath,
-  getPropByPath,
   extractValue,
+  getPropByPath,
   deepCloneObj,
   unique
 };
 
 export default {
   resetObjectToEmpty,
-  getValuePropByPath,
   getPropByPath,
   extractValue,
   deepCloneObj,
