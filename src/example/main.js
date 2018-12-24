@@ -1,5 +1,4 @@
-// import ojo from '../../bin/main';
-const ojo = require('../../bin/main');
+const ojo = require('../../bin/ojo.js');
 
 function start() {
   const obj = {

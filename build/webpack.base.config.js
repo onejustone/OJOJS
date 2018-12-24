@@ -46,10 +46,14 @@ module.exports = {
     rules: [{
         test: /\.js$/,
         exclude: '/node_modules',
-        use: [{
+        include: '/src',
+        use: [
+          {
             loader: 'babel-loader'
           },
-          'eslint-loader'
+          {
+            loader: 'eslint-loader'
+          }
         ]
       },
       {
