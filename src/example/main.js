@@ -1,42 +1,26 @@
-// import lib from 'lib'
+// import ojo from '../../bin/main';
+const ojo = require('../../bin/main');
 
-// import {
-//   addHandler,
-//   preventDefault,
-//   stopPropagation,
-//   getWheelDelta
-// } from 'lib'
+function start() {
+  const obj = {
+    list: [120, 200, 340, 40],
+    name: '统计数据',
+    children: [],
+    subData: {
+      a: 'a',
+      b: 'b'
+    }
+  };
 
-// import {
-//   addHandler,
-//   preventDefault,
-//   stopPropagation,
-//   getWheelDelta
-// } from 'lib/dom'
-
-import dom from 'lib/dom';
-
-require('./main.css');
-
-function start(params) {
-  const childrn = document.querySelector('#children');
-  console.log(childrn);
-  dom.addHandler(childrn, 'click', function (event) {;
-    console.log(event);
-  });
-  dom.addHandler(childrn, 'mousewheel', function (event) {
-    // FireFox浏览器，要使用DOMMouseScroll
-    // dom.preventDefault(event)
-    console.log(event);
-    dom.stopPropagation(event);
-    const wheelDelta = dom.getWheelDelta(event);
-    const direction = wheelDelta > 0 ? 'up' : 'down';
-    const scrollTop = event.scrollTop;
-    console.log(childrn.scrollTop, 'scollTop');
-
-    if (direction === 'up')
-      console.log(wheelDelta, 'wheelDelta');
-  });
+  console.log(ojo._typeof({}));
+  console.log(ojo._typeof([]));
+  console.log(ojo._typeof(12345));
+  console.log(ojo._typeof('to be or not'));
+  console.log(ojo._typeof(new Date()));
+  console.log(ojo._typeof(function () {}));
+  console.log(ojo._typeof(new RegExp));
+  console.log(ojo._typeof(null));
+  console.log(ojo._typeof(null));
 }
 
 start();
