@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "项目中常用的函数工具库",
   "main": "bin/ojo.js",
-  "repository": "git@github.com:onejustone/OJOJS.git",
+  "repository": "git@github.com:onejustone/ojo.js.git",
   "author": "onejustone <onejustone404@gmail.com>",
   "license": "MIT",
   "scripts": {

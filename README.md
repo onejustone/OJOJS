@@ -1,36 +1,34 @@
-# OJOJS
+# ojo.js
 
-> onejustone 的私人 `JavaScript` 武器库。
-
-## 前言
+> 日常项目中常用的函数工具库
 
 ## 使用
 
 ```bash
-npm i install ojojs
+npm i install ojo.js
 ```
 
 ```js
 // 加载全部
-import ojo from "ojojs";
+import ojo from "ojo.js";
 
 function handleWindowResize () {}
 
-handleWindowResize = ojojs.debouce(handleWindowResize, 300);
+handleWindowResize = ojo.debouce(handleWindowResize, 300);
 // or
-handleWindowResize = ojojs.energy.debouce(handleWindowResize, 300);
+handleWindowResize = ojo.energy.debouce(handleWindowResize, 300);
 
 // 按需加载
-import { debounce } from "ojojs";
+import { debounce } from "ojo";
 
 handleWindowResize = debouce(handleWindowResize, 300);
 
 // 按需加载相应的子模块
-import energy from "ojojs/energy";
+import energy from "ojo/energy";
 handleWindowResize = energy.debouce(handleWindowResize, 300);
 
 // 按需加载相应子模块下的函数
-import { debounce } from "ojojs/energy";
+import { debounce } from "ojo/energy";
 
 handleWindowResize = debouce(handleWindowResize, 300);
 ```
@@ -135,6 +133,7 @@ cnpm install lodash --save
 `catIn` 用来判断某个目标元素是否是特定元素的后代元素。比如有一个弹窗，我们希望点击在该弹窗内点击时不做任何处理，而当点击该素之外的空白区域，比如 window 上触发了点击事件时，关闭该弹窗
 
 ```js
+// example
 if (!catIn(event.target, dialogContainer))  {
   handleCloseDialog()
 }
@@ -199,6 +198,7 @@ function popupCenterWindow(href, title, percent = 0.8, closeCb) {
 `debounce` 函数防抖，这个不多说，直接用，如有兴趣可以参考我的博文。
 
 ```js
+// example
 function handleInputChange () {};
 const _handleInputChange = debounce(handleInputChange, 300);
 ```
@@ -242,6 +242,7 @@ function debounce (func, wait, immediate) {
 `env` 检测前端设备运行环境。
 
 ```js
+// env source code
 const inBrowser = typeof window !== 'undefined';
 const UA = inBrowser && window.navigator.userAgent.toLowerCase();
 const isIE = UA && /msie|trident/.test(UA);
@@ -259,6 +260,7 @@ const isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
 `formatToNumber` 用于将类数字的数值转换为数字。主要包括对逗号的处理。
 
 ```js
+// example
 const numberArr = [
   123,
   123.098,
@@ -292,6 +294,7 @@ function formatToNumebr (x) {
 `formartFileSize` 用于计算文件的大小，输入的原始大小按 `byte` 计算。目前最大只是计算到了 `G`。
 
 ```js
+// example
 formartFileSize(Math.pow(1024, 0)); // 1.0 B
 formartFileSize(Math.pow(1024, 1)); // 1.0 K
 formartFileSize(Math.pow(1024, 2)); // 1.0 M
@@ -299,6 +302,7 @@ formartFileSize(Math.pow(1024, 3)); // 1.0 G
 ```
 
 ```js
+// formartFileSize source code
 function formartFileSize (byteSize) {
   const fileSizeUnit = ['B', 'K', 'M', 'G'];
 
@@ -328,6 +332,7 @@ function formartFileSize (byteSize) {
 ### prettyNumberToMoney
 
 ```js
+// example
 const numberArr = [ 123, 123.098, '123', '123098', '451123.098', '34451123' ];
 const prettyNumbers = numberArr.map(item => prettyNumberToMoney({ number: item }));
 // ["¥123.00", "¥123.10", "¥123.00", "¥123,098.00", "¥451,123.10", "¥34,451,123.00"]
@@ -335,7 +340,6 @@ const prettyNumbers = numberArr.map(item => prettyNumberToMoney({ number: item }
 
 ```js
 // prettyNumberToMoney source code
-
 function prettyNumberToMoney ({
   prefix = '¥',
   number = null,
@@ -372,11 +376,11 @@ function prettyNumberToMoney ({
 `sum` 加法运算，支持传入单值和数组，解决浮点数计算精度问题。目前精度只精确到小数点后两位。
 
 ```js
-// sum simple
+// sum example 1
 0.1 + 0.2; // 0.30000000000000004
 sum(0.1, 0.2); // 0.3
 
-// sum arr
+// sum example 2
 const numberArr = [ 123, 123.098, '123', '123098', '451123.098', '34451123' ];
  const numbers = numberArr.map(formatToNumebr);
  const total = sum(numbers);
@@ -394,6 +398,7 @@ function sum() {
 `flattenDeep` 实现方式如下：
 
 ```js
+// flattenDeep source code
 function flattenDeep(arr1) {
   return arr1.reduce((acc, val) => Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val), []);
 }
@@ -404,6 +409,7 @@ function flattenDeep(arr1) {
 `multiply` 和 `sum` 是一样的。
 
 ```js
+// multipy source code
 function multiply() {
   const flatArgumentsArr = flattenDeep(Array.from(arguments));
   return flatArgumentsArr.reduce((x, y) => +(+x * +y).toFixed(2));
@@ -415,6 +421,7 @@ function multiply() {
 ### getPropByPath
 
 ```js
+// getPropByPath example
 const targetObj = [
   {
     a: [
@@ -463,6 +470,7 @@ function getPropByPath(obj, path, strict) {
 `extractValue` 其实就是获取 `getPropByPath` 中 `v` 的值。
 
 ```js
+// extractValue example
 const targetObj = [
   {
     a: [
@@ -519,6 +527,7 @@ function deepCloneObj(source) {
 有时候我们想将一个对象里所有的值全部置为空，并且当 `key` 是一个 `Object` 时，递归调用该方法。
 
 ```js
+// resetObjectToEmpty example
 const obj = {
   list: [120, 200, 340, 40],
   name: '统计数据',
@@ -539,6 +548,7 @@ resetObjectToEmpty(obj);
 ```
 
 ```js
+// resetObjectToEmpty source code
 function resetObjectToEmpty(targetObj) {
   if (typeof targetObj === 'undefined') return;
 
@@ -570,6 +580,7 @@ function resetObjectToEmpty(targetObj) {
 封装 `Object.hasOwnProperty` 方法。
 
 ```js
+// hasOwn source code
 function hasOwn (obj, key) {
   return isObject(obj) && Object.prototype.hasOwnProperty.call(obj, key);
 };
@@ -578,6 +589,7 @@ function hasOwn (obj, key) {
 ### isNumber
 
 ```js
+// isNumber source code
 function isNumber(value) {
   return !isNaN(parseFloat(value));
 };
@@ -586,6 +598,7 @@ function isNumber(value) {
 ### isString
 
 ```js
+// isString source code
 function isString (value) {
   return typeof value === 'string' || value instanceof String;
 };
@@ -594,6 +607,7 @@ function isString (value) {
 ### isNativeStringType
 
 ```js
+// isNativeStringType source code
 function isNativeStringType (type) {
   return type === 'string' || type === 'url' || type === 'hex' || type === 'email' || type === 'pattern';
 };
@@ -602,6 +616,7 @@ function isNativeStringType (type) {
 ### isEmptyArray
 
 ```js
+// isEmptyArray source code
 function isEmptyArray (value) {
   return Array.isArray(value) && !value.length;
 };
@@ -610,6 +625,7 @@ function isEmptyArray (value) {
 ### isObject
 
 ```js
+// isObject source code
 function isObject (value) {
   return value && typeof value === 'object' && value.constructor === Object;
 };
@@ -618,6 +634,7 @@ function isObject (value) {
 ### isEmptyObject
 
 ```js
+// isEmptyObject source code
 function isEmptyObject (obj) {
   return Object.keys(obj).length === 0;
 };
@@ -626,6 +643,7 @@ function isEmptyObject (obj) {
 ### isEmpty
 
 ```js
+// isEmpty source code
 function isEmpty (value, type) {
   if (value === undefined || value === null) {
     return true;
@@ -650,7 +668,19 @@ function isEmpty (value, type) {
 ### _typeof
 
 ```js
-// 判断数据类型
+// _typeof example
+_typeof({}) // object
+_typeof([]) // array
+_typeof(12345) // number
+_typeof('to be or not') // string
+_typeof(new Date()) // date
+_typeof(function () {}) // function
+_typeof(new RegExp) // regexp
+_typeof(null) // null
+```
+
+```js
+// _typeof source code
 function _typeof (obj) {
   const class2type = {};
   'Boolean String Number Array Function Object Null Date RegExp Error'.split(' ').forEach((e, i) => {
@@ -660,13 +690,4 @@ function _typeof (obj) {
     ? class2type[class2type.toString.call(obj)]
     : typeof obj;
 };
-
-// _typeof({}) object
-// _typeof([]) array
-// _typeof(12345) number
-// _typeof('to be or not') string
-// _typeof(new Date()) date
-// _typeof(function () {}) function
-// _typeof(new RegExp) regexp
-// _typeof(null) null
 ```
