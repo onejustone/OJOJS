@@ -14,7 +14,9 @@ module.exports = {
     // 简化 import 路径
     alias: {
       '~': resolve(__dirname, '../src'),
-      'lib': resolve(__dirname, '../src/lib')
+      'lib': resolve(__dirname, '../src/lib'),
+      'api': resolve(__dirname, '../src/api'),
+      'http': resolve(__dirname, '../src/http')
     }
   },
 
@@ -23,7 +25,7 @@ module.exports = {
     // publicPath: config.publicPath,
     // chunkFilename 使用 [chunkhash] 防止浏览器读取错误缓存，那么 entry 同样需要加上 hash。
     // 但使用 webpack-serve 启动开发环境时，entry 文件是没有 [chunkhash] 的，用了会报错。
-    filename: dev ? '[name].js' : '[name].js',
+    filename: dev ? '[name].js' : '[name].[chunkhash].js',
     /*
     代码中引用的文件（js、css、图片等）会根据配置合并为一个或多个包，我们称一个包为 chunk。
     每个 chunk 包含多个 modules。无论是否是 js，webpack 都将引入的文件视为一个 module。
