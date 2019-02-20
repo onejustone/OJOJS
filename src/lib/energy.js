@@ -1,5 +1,67 @@
 
-const debounce = function _debounce (func, wait, immediate) {
+// 第一次很重要
+// 一段时间内，无论触发多少次 func，只执行第一次的
+export function throttle (func, waitMsec) {
+  let lastTime = 0; // 上一次执行的时间
+
+  return function (...agrs) {
+    const context = this;
+
+    const currentTime = +new Date();
+
+     // 其实该 if 判断可以没有，但是为了更严谨一些
+    if (!lastTime) {
+      lastTime = currentTime;
+      func.apply(context, agrs);
+    }
+
+    const spaceOfTime = currentTime - lastTime; // msec
+
+    if (spaceOfTime > waitMsec) {
+      lastTime = currentTime;
+      func.apply(context, agrs);
+    }
+  };
+};
+
+export function _debounce (func, wait) {
+  let delayTimer = null;
+
+  return function (...agrs) {
+    const context = this;
+
+    delayTimer && clearTimeout(delayTimer);
+
+    delayTimer = setTimeout(() => {
+      clearTimeout(delayTimer);
+      delayTimer = null;
+      func.apply(context, args);
+    }, wait);
+  };
+};
+
+export function enhancedThrottle(func, wait) {
+  const lastTime = null;
+  const delayTimer = null;
+
+  return function (...args) {
+    const context = this;
+    const currentTime = +new Date();
+
+    const spaceOfTime = currentTime - lastTime;
+
+    if (spaceOfTime < wait) {
+      clearTimeout(delayTimer);
+      delayTimer = setTimeout(() => {
+        func.apply(context, args);
+      }, wait);
+    } else {
+      func.apply(context, args);
+    }
+  };
+}
+
+export function debounce (func, wait, immediate) {
   let timeout, args, context, timestamp, result;
 
   const later = function () {
@@ -34,10 +96,7 @@ const debounce = function _debounce (func, wait, immediate) {
   };
 };
 
-export {
-  debounce,
-};
-
 export default {
+  throttle,
   debounce,
 };
