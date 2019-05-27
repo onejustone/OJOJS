@@ -29,7 +29,7 @@ const resolve = p => {
 const builds = {
    'web-full-dev': {
       entry: resolve('src/lib/index.js'),
-      dest: resolve('dist/ojo.js'),
+      dest: resolve('bin/ojo.js'),
       format: 'umd',
       env: 'development',
       plugins: [node(), commonjs()],
@@ -37,7 +37,7 @@ const builds = {
    },
    'web-full-prod': {
       entry: resolve('src/lib/index.js'),
-      dest: resolve('dist/ojo.min.js'),
+      dest: resolve('bin/ojo.min.js'),
       format: 'umd',
       env: 'production',
       plugins: [node(), commonjs()],
@@ -57,8 +57,10 @@ function genConfig(name) {
          file: opts.dest,
          format: opts.format,
          banner: opts.banner,
-         name: opts.moduleName || 'ojo'
-      }
+         name: opts.moduleName || 'ojo',
+         // https://github.com/rollup/rollup/issues/2106
+         exports: 'named',
+      },
    };
 
    // build-in vars

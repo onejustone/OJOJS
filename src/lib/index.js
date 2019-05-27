@@ -1,6 +1,7 @@
 export * from "./dom"; // export 和 import 的复合写法，整体导出 dom 模块
 
 export * from "./energy";
+import energy from "./energy";
 
 export * from "./env";
 
@@ -17,3 +18,6 @@ export * from "./shortcut";
 
 export * from "./type";
 
+export default {
+  energy
+};
