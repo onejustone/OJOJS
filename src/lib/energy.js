@@ -42,7 +42,7 @@ export function _debounce (func, wait) {
 
 export function enhancedThrottle(func, wait) {
   const lastTime = null;
-  const delayTimer = null;
+  let delayTimer = null;
 
   return function (...args) {
     const context = this;

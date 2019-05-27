@@ -57,25 +57,6 @@ const _typeof = function (obj) {
     : typeof obj;
 };
 
-const each = function _each (obj, callback) {
-  let i, len;
-  if (Array.isArray(obj)) {
-    for (i = 0, len = obj.length; i < len; i++) {
-      if (callback(obj[i], i, obj) === false) {
-        break;
-      }
-    }
-  } else if (isObject(obj)) {
-    const keysArr = Object.keys(obj);
-    for (const key of keysArr) {
-      if (callback(obj[key], key, obj) === false) {
-        break;
-      }
-    }
-  }
-  return obj;
-};
-
 export {
   hasOwn,
   isNumber,
@@ -84,8 +65,7 @@ export {
   _typeof,
   isEmptyArray,
   isEmptyObject,
-  isEmpty,
-  each
+  isEmpty
 };
 
 export default {
@@ -96,6 +76,5 @@ export default {
   _typeof,
   isEmptyArray,
   isEmptyObject,
-  isEmpty,
-  each
+  isEmpty
 };

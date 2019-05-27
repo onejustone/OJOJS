@@ -8,43 +8,43 @@ import resolve from 'rollup-plugin-node-resolve';
 // 值得注意点是，rollup 大打包后的 cjs, umd 并不支持 tree-shaking，所以请尽量使用 ES6 模块，以获得更精简的代码。
 import commonjs from 'rollup-plugin-commonjs';
 
-// babel 插件，将最新特性的 ES 代码转换为 ES5
+// babel 插件，将最新特性的 ES6 代码转换为 ES5, 无需配置，比babel更轻量；
 import babel from 'rollup-plugin-babel';
 
 // 默认情况下 rollup 不支持导入 json 模块，所以我们需要使用 json 插件来支持
 import json from 'rollup-plugin-json';
 
-// alias 与 webpack 的 alias 一样，可以我们减少文件路径的书写
+// alias 与 webpack 的 alias 一样，可以我们减少文件路径的书写, 替换模块路径中的别名；
 import alias from 'rollup-plugin-alias';
 
 // uglify 进一步压缩代码的体积，但是 uglify 不支持压缩 ES 模块和 ES6 语法，请使用 terser
 // import { uglify } from 'rollup-plugin-uglify';
 
-// import { terser } from "rollup-plugin-terser";
+import {terser} from "rollup-plugin-terser";
 
 export default {
-  input: 'src/lib/index.js',
-  output: {
-      file: 'bin/ojo.js',
-      format: 'es',
-      moduleName: 'ojo',
-      banner: '', // 文件头部添加点内容
-      footer: '',// 文件尾部添加点内容,
-      plugins: [
-        commonjs(),
-        json(),
-        resolve(),
-        babel({
-          exclude: 'node_modules/**', // 只编译我们的源代码,
-          runtimeHelpers: true
-        }),
-        alias({
-          resolve: ['.js'],
-          lib: './src/lib'
-        }),
-        terser()
-      ]
+    input: 'src/lib/index.js',
+    output: {
+        file: 'bin/ojo.js',
+        format: 'es',
+        moduleName: 'ojo',
+        banner: '', // 文件头部添加点内容
+        footer: '',// 文件尾部添加点内容,
+        plugins: [
+            json(),
+            resolve(),
+            babel({
+                exclude: 'node_modules/**', // 只编译我们的源代码,
+                runtimeHelpers: true
+            }),
+            commonjs(),
+            alias({
+                resolve: ['.js'],
+                lib: './src/lib'
+            }),
+            terser()
+        ]
     }
-  // 在使用 resolve 的情况下，我们仍然希望某些第三方库保持外部应用，可以使用 external 排除
-  // external: ['node_modules/rxjs', 'node_modules/axios'],
+    // 在使用 resolve 的情况下，我们仍然希望某些第三方库保持外部应用，可以使用 external 排除
+    // external: ['node_modules/rxjs', 'node_modules/axios'],
 };

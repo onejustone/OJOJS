@@ -677,6 +677,7 @@ _typeof(new Date()) // date
 _typeof(function () {}) // function
 _typeof(new RegExp) // regexp
 _typeof(null) // null
+_typeof(true) //
 ```
 
 ```js

@@ -74,24 +74,24 @@ const deepCloneObj = function _deepCloneObj(source) {
   return targetObj;
 };
 
-function _deepCloneObj(obj) {
-  // 使用 Reflect
-  const isType = (obj) => (type) => Object.prototype.toString.call(obj) === `[object ${type}]`;
-
-  const isObject = (obj) => isType(obj)('Object');
-  const isArray = (array) => isType(array)('Array');
-
-  if (!isObject(obj)) {
-    throw new Error(`${obj} is not Object`);
-  }
-
-  let newObj = isArray(obj) ? [...obj] : {...obj};
-  Reflect.ownKeys(newObj).forEach(key => {
-    newObj[key] = isObject(obj[key]) ? _deepCloneObj(obj[key]) : obj[key];
-  });
-
-  return newObj;
-};
+// function _deepCloneObj(obj) {
+//   // 使用 Reflect
+//   const isType = (obj) => (type) => Object.prototype.toString.call(obj) === `[object ${type}]`;
+//
+//   const isObject = (obj) => isType(obj)('Object');
+//   const isArray = (array) => isType(array)('Array');
+//
+//   if (!isObject(obj)) {
+//     throw new Error(`${obj} is not Object`);
+//   }
+//
+//   let newObj = isArray(obj) ? [...obj] : {...obj};
+//   Reflect.ownKeys(newObj).forEach(key => {
+//     newObj[key] = isObject(obj[key]) ? _deepCloneObj(obj[key]) : obj[key];
+//   });
+//
+//   return newObj;
+// };
 
 const unique = function (items, key) {
   const tmpArr = [];
