@@ -13,8 +13,8 @@ module.exports = {
   resolve: {
     // 简化 import 路径
     alias: {
+      'lib': resolve(__dirname, '../lib'),
       '~': resolve(__dirname, '../src'),
-      'lib': resolve(__dirname, '../src/lib'),
       'api': resolve(__dirname, '../src/api'),
       'http': resolve(__dirname, '../src/http')
     }

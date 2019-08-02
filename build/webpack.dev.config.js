@@ -27,6 +27,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 module.exports = devWebpackConfig;
 
 module.exports.serve = {
+  clientLogLevel: 'warning',
+  historyApiFallBack: true,
   host: '0.0.0.0',
   port: devConfig.serve.port,
   // 开发环境允许其他电脑访问
