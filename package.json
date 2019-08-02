@@ -7,15 +7,13 @@
   "author": "onejustone <onejustone404@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "local": "cross-env NODE_ENV=development BABEL_ENV=development webpack-serve --config ./build/webpack.local.config.js",
-    "dev": "cross-env NODE_ENV=development BABEL_ENV=development webpack-serve --config build/webpack.dev.config.js",
-    "build": "cross-env NODE_ENV=production BABEL_ENV=production webpack-cli --config build/webpack.prod.config.js",
-    "webpack-serve": "webpack-serve webpack.config.js",
+    "local": "cross-env NODE_ENV=development BABEL_ENV=development webpack-serve --config webpackConfig/webpack.local.config.js",
+    "dev": "cross-env NODE_ENV=development BABEL_ENV=development webpack-serve --config webpackConfig/webpack.dev.config.js",
+    "build": "cross-env NODE_ENV=production BABEL_ENV=production webpack-cli --config webpackConfig/webpack.prod.config.js",
     "lib:build": "node scripts/build.js",
     "lib:dev": "rollup -w -c scripts/config.js --environment TARGET:web-full-dev",
-    "release": "rollup -c rollup.config.js",
-    "lint": "eslint --ext *.js",
-    "lint-fix": "eslint --fix *.js"
+    "lint": "eslint --ext .js, lib",
+    "lint-fix": "eslint --fix lib"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",

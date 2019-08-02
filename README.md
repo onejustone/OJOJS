@@ -42,89 +42,15 @@ handleWindowResize = debouce(handleWindowResize, 300);
 
 ```bash
 ├── bin  # rollup 构建输出目录
-│   └── main.js
 ├── build # webpack 配置文件目录
-├── package.json
-├── postcss.config.js # postcss 配置
-├── rollup.config.js # rollup 配置文件
-├── src
-│   ├── example # 开发环境下 webpack 入口目录
+├── scripts # rollup 脚本目录
+├── lib # lib core 
+├── demo # demo
 │   │   ├── index.html
 │   │   ├── main.css
 │   │   └── main.js # 开发环境下 webpack 入口文件，该文件会 import 'lib/index.js'
-│   └── lib # core code
-│       ├── dom.js
-│       ├── energy.js
-│       ├── env.js
-│       ├── format.js
-│       ├── index.js
-│       ├── operator.js
-│       ├── other.js
-│       ├── shortcut.js
-│       ├── time.js
-│       └── type.js
 └── webpack.init.sh # 快速安装项目相关依赖的脚本
 ```
-
-### rollup.config.js
-
-```js
-// 指定配置文件
-// rollup -c build/rollup.config.js
-
-// 添加 json 插件
-import json from 'rollup-plugin-json';
-// rollup-plugin-node-resolve 插件可以告诉 Rollup 如何查找外部模块
-import resolve from 'rollup-plugin-node-resolve';
-// 将 node_modules 中 CommonJS模块转换为 ES2015 供 Rollup 处理
-import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
-import alias from 'rollup-plugin-alias';
-
-export default {
-  input: 'src/lib/index.js',
-  output: {
-    file: 'bin/main.js',
-    format: 'umd',
-    name: 'ojo'
-  },
-  plugins: [
-    commonjs(),
-    json(),
-    resolve(),
-    babel({
-      exclude: 'node_modules/**', // 只编译我们的源代码,
-      runtimeHelpers: true
-    }),
-    alias({
-      resolve: ['.js'],
-      lib: './src/lib'
-    })
-  ]
-  // external: ['node_modules/rxjs', 'node_modules/axios'],
-};
-```
-
-### webpack.init.sh
-
-```bash
-cnpm install webpack webpack-cli webpack-serve webpack-merge \
-eslint eslint-config-enough eslint-loader \
-@babel/cli @babel/core \
-@babel/preset-env @babel/preset-stage-2 \
-@babel/plugin-transform-runtime @babel/runtime \
-@babel/plugin-syntax-dynamic-import \
-babel-loader babel-eslint \
-html-webpack-plugin html-loader \
-css-loader style-loader  postcss-loader autoprefixer \
-url-loader file-loader cross-env \
-internal-ip clean-webpack-plugin \
-rollup-plugin-alias rollup-plugin-json rollup-plugin-node-resolve \
-rollup-plugin-commonjs rollup-plugin-babel --save-dev && \
-cnpm install lodash --save
-```
-
-> Webpack 配置请参考项目源码，此处就不贴代码了
 
 ## dom
 

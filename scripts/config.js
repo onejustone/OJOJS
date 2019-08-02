@@ -28,7 +28,7 @@ const resolve = p => {
 
 const builds = {
    'web-full-dev': {
-      entry: resolve('src/lib/index.js'),
+      entry: resolve('lib/index.js'),
       dest: resolve('bin/ojo.js'),
       format: 'umd',
       env: 'development',
@@ -36,7 +36,7 @@ const builds = {
       banner
    },
    'web-full-prod': {
-      entry: resolve('src/lib/index.js'),
+      entry: resolve('lib/index.js'),
       dest: resolve('bin/ojo.min.js'),
       format: 'umd',
       env: 'production',
