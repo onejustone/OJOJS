@@ -14,7 +14,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: resolve(__dirname, '../src/example/index.html'),
+      template: resolve(__dirname, '../demo/example/index.html'),
       /*
       因为和 webpack 4 的兼容性问题，chunksSortMode 参数需要设置为 none
       https://github.com/jantimon/html-webpack-plugin/issues/870

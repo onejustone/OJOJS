@@ -10,7 +10,7 @@ const version = process.env.VERSION || require('../package.json').version;
 
 const banner =
   '/*!\n' +
-  ` * ojo.js v${version}\n` +
+  ` * sophon-utils v${version}\n` +
   ` * (c) 2019-${new Date().getFullYear()} onejustone\n` +
   ' * Released under the MIT License.\n' +
   ' */';
@@ -29,7 +29,7 @@ const resolve = p => {
 const builds = {
    'web-full-dev': {
       entry: resolve('lib/index.js'),
-      dest: resolve('bin/ojo.js'),
+      dest: resolve('bin/sophon-utils'),
       format: 'umd',
       env: 'development',
       plugins: [node(), commonjs()],
@@ -37,7 +37,7 @@ const builds = {
    },
    'web-full-prod': {
       entry: resolve('lib/index.js'),
-      dest: resolve('bin/ojo.min.js'),
+      dest: resolve('bin/Util.min.js'),
       format: 'umd',
       env: 'production',
       plugins: [node(), commonjs()],
@@ -57,7 +57,7 @@ function genConfig(name) {
          file: opts.dest,
          format: opts.format,
          banner: opts.banner,
-         name: opts.moduleName || 'ojo',
+         name: opts.moduleName || 'Util',
          // https://github.com/rollup/rollup/issues/2106
          exports: 'named',
       },

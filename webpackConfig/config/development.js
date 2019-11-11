@@ -5,7 +5,7 @@ console.log(resolve(__dirname));
 const config = {
   publicPath: '/assets/',
   outputPath: '/dist',
-  entry: resolve(__dirname, '../../src/example/main.js'),
+  entry: resolve(__dirname, '../../demo/example/main.js'),
   serve: {
     port: 7084
   }

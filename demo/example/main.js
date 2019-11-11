@@ -1,4 +1,4 @@
-import ojo from 'lib';
+import Util from 'lib';
 import mixins from 'lib/prototype/mixins';
 import { Person, Man, Boy} from './person';
 
@@ -24,10 +24,10 @@ function start() {
 
   function print() {
     console.log('hello world');
-    ojo.format.formartFileSize(34);
+    Util.format.formartFileSize(34);
   }
 
-  const throttlePrint = ojo.energy.throttle(print, 3000);
+  const throttlePrint = Util.energy.throttle(print, 3000);
   button.addEventListener('click', throttlePrint);
 }
 
