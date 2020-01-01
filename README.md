@@ -1,16 +1,14 @@
-# sophon-utils
-
-> sophon util library
+# ojo.js
 
 ## 使用
 
 ```bash
-npm i install sophon-utils
+npm i install ojo.js
 ```
 
 ```js
 // 加载全部
-import Util from "sophon-utils";
+import Util from "ojo.js";
 
 function handleWindowResize () {}
 
@@ -24,11 +22,11 @@ import { debounce } from "Util";
 handleWindowResize = debouce(handleWindowResize, 300);
 
 // 按需加载相应的子模块
-import energy from "Util/energy";
+import energy from "ojo.js/energy";
 handleWindowResize = energy.debouce(handleWindowResize, 300);
 
 // 按需加载相应子模块下的函数
-import { debounce } from "Util/energy";
+import { debounce } from "ojo.js/energy";
 
 handleWindowResize = debouce(handleWindowResize, 300);
 ```
